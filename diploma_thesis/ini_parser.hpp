@@ -34,15 +34,15 @@ private:
 	std::map<std::string, int>* sections_map = nullptr; //соответствие названи€ секции номеру массива variables_str_array
 
 	//текуща€ секци€ дл€ добавлени€ переменных
-	std::string current__section_name; //им€ секции
-	int current__section_number = -1; //номер секции = индекс  этой секции в массиве variables_str_array
+	std::string current_section_name; //им€ секции
+	int current_section_number = -1; //номер секции = индекс  этой секции в массиве variables_str_array
 
 	std::string delete_spaces(const std::string& src_str); //удалить пробелы и знаки табул€ции в начале строки
 	std::tuple<string_type, std::string, std::string> research_string(const std::string& src_str); //исследовать строку из файла: возвращаемый кортеж содержит код содержимого, название переменной или секции, значение переменной
 
-	std::string get__section_name(const int _section_index); //получить им€ секции по ее номеру
-	int get__section_number(const std::string& _section_name); //получить номер секции по ее имени
-	std::tuple<std::string, std::string> get__section_variable_names(const std::string& src_str); //из строки запроса получить им€ секции и им€ переменной
+	std::string get_section_name(const int _section_index); //получить им€ секции по ее номеру
+	int get_section_number(const std::string& _section_name); //получить номер секции по ее имени
+	std::tuple<std::string, std::string> get_section_variable_names(const std::string& src_str); //из строки запроса получить им€ секции и им€ переменной
 	std::string get_variable_value(const int _section_index, const std::string& _variable_name); //получить значение переменной по имени секции и имени переменной
 
 public:
@@ -77,15 +77,15 @@ public:
 		std::string _section_name;
 		std::string _variable_name;
 
-		std::tie(_section_name, _variable_name) = get__section__variable_names(input_str); //может выбросить исключение ParserException_incorrect_request()
+		std::tie(_section_name, _variable_name) = get_section_variable_names(input_str); //может выбросить исключение ParserException_incorrect_request()
 
-		int _section_index = get__section_number(_section_name); //получить номер секции по ее номеру, возвращает -1, если секции нет
+		int _section_index = get_section_number(_section_name); //получить номер секции по ее номеру, возвращает -1, если секции нет
 		if (_section_index < 0)
 		{
 			throw ParserException_no_section();
 		}
 
-		std::string _variable_value = get__variable_value(_section_index, _variable_name); //получить  значение переменной 
+		std::string _variable_value = get_variable_value(_section_index, _variable_name); //получить  значение переменной 
 
 		_variable_value = std::regex_replace(_variable_value, std::regex("([ \t])"), ""); //убрать пробелы и табул€цию
 

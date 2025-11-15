@@ -13,7 +13,7 @@ endif()
 project (file_server)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(OPENSSL_ROOT_DIR D:/My_Programs/C++/openssl)
+#set(OPENSSL_ROOT_DIR D:/My_Programs/C++/openssl)
 set(BOOST_ROOT D:/My_Programs/C++/boost_1_89_0)
 set(PostgreSQL_ROOT D:/Programs/PostgreSQL/bin) 
 #set(BOOST_INCLUDEDIR ${BOOST_ROOT}/include)

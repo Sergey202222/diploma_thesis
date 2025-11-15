@@ -27,7 +27,7 @@ ini_parser::ini_parser(const ini_parser& other) // конструктор копирования
 {
 	_parser_invalid = other._parser_invalid; //есть ли проблемы с парсером
 	_file_read = other._file_read;  //хранит информацию о том, удалось ли считать данные из файла
-	invalid_data = other.invalid_data; //хранит информацию, есть ли в файле некорректная информация
+	_invalid_data = other._invalid_data; //хранит информацию, есть ли в файле некорректная информация
 	incorrect_str_num = other.incorrect_str_num;  //номер строки, содержащей некорректный синтаксис
 	incorrect_str = other.incorrect_str;  //содержимое строки с некорректным синтаксисом
 
@@ -60,7 +60,7 @@ ini_parser::ini_parser(ini_parser&& other) noexcept	// конструктор перемещения
 {
 	_parser_invalid = other._parser_invalid; //есть ли проблемы с парсером
 	_file_read = other._file_read;  //хранит информацию о том, удалось ли считать данные из файла
-	invalid_data = other.invalid_data; //хранит информацию, есть ли в файле некорректная информация
+	_invalid_data = other._invalid_data; //хранит информацию, есть ли в файле некорректная информация
 	incorrect_str_num = other.incorrect_str_num;  //номер строки, содержащей некорректный синтаксис
 	incorrect_str = other.incorrect_str;  //содержимое строки с некорректным синтаксисом
 
@@ -110,18 +110,18 @@ std::string ini_parser::delete_spaces(const std::string& src_str) //удалить проб
 //исследовать строку: возвращаемый кортеж содержит код содержимого, название переменной или секции, значение переменной
 std::tuple<string_type, std::string, std::string> ini_parser::research_string(const std::string& src_str)
 {
-	string_type temp_string_type = string_type::invalid_;  //строка невалидная
+	string_type temp_string_type = string_type::_invalid_;  //строка невалидная
 	std::string temp_name = ""; //имя секции или переменной
 	std::string temp_value = ""; //значение переменной
 
 	if (src_str == "") //переданная строка пустая
 	{
-		return std::make_tuple(string_type::empty_, temp_name, temp_value);
+		return std::make_tuple(string_type::_empty_, temp_name, temp_value);
 	}
 
 	if (src_str[0] == ';') //переданная строка целиком содержит комментарий
 	{
-		return std::make_tuple(string_type::empty_, temp_name, temp_value);
+		return std::make_tuple(string_type::_empty_, temp_name, temp_value);
 	}
 
 	if (src_str[0] == '[') //переданная строка предположительно содержит название секции
@@ -132,7 +132,7 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 			(end_pos == 1)) // ||					//имя секции не может быть пустым
 
 		{
-			return std::make_tuple(string_type::invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
+			return std::make_tuple(string_type::_invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
 		}
 		else
 		{
@@ -140,7 +140,7 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 			{
 				if ((src_str[i] == ' ') || (src_str[i] == '\t') || (src_str[i] == '.')) //название секции не может содержать пробелов, знаков табуляции, точек
 				{
-					return std::make_tuple(string_type::invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
+					return std::make_tuple(string_type::_invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
 				}
 				else
 				{
@@ -153,17 +153,17 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 			{
 				if ((src_str[i] != ' ') && (src_str[i] != '\t') && (src_str[i] != ';'))
 				{
-					return std::make_tuple(string_type::invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
+					return std::make_tuple(string_type::_invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
 				}
 
 				if (src_str[i] == ';') //после знака начала комментария можно не проверять
 				{
-					return std::make_tuple(string_type::section_, temp_name, temp_value); //вернуть название секции
+					return std::make_tuple(string_type::_section_, temp_name, temp_value); //вернуть название секции
 				}
 			}
 
 			//недопустимого содержимого после закрывающей скобки нет, поэтому можно вернуть результат
-			return std::make_tuple(string_type::section_, temp_name, temp_value); //вернуть название секции
+			return std::make_tuple(string_type::_section_, temp_name, temp_value); //вернуть название секции
 		}
 	}
 
@@ -172,7 +172,7 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 
 	if (end_pos == std::string::npos)    //знака равенства нет
 	{
-		return std::make_tuple(string_type::invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
+		return std::make_tuple(string_type::_invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
 	}
 
 	for (int i = 0; (i < end_pos) && (src_str[i] != ' ') && (src_str[i] != '\t') && (src_str[i] != '.'); ++i) //до знака равенства или первого знака табуляции или пробела
@@ -183,7 +183,7 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 	//имя переменной не может быть пустым
 	if (temp_name == "")
 	{
-		return std::make_tuple(string_type::invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
+		return std::make_tuple(string_type::_invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
 	}
 
 	// между именем переменной и знаком равенства могут быть только знаки пробелов и табуляций
@@ -191,7 +191,7 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 	{
 		if ((src_str[i] != ' ') && (src_str[i] != '\t'))
 		{
-			return std::make_tuple(string_type::invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
+			return std::make_tuple(string_type::_invalid_, temp_name, temp_value); //вернуть результат о невалидной строке
 		}
 	}
 
@@ -200,13 +200,13 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 	{
 		if (src_str[i] == ';') //дальше только комментарий
 		{
-			return std::make_tuple(string_type::variable_, temp_name, temp_value); //вернуть результат - имя и значение переменной
+			return std::make_tuple(string_type::_variable_, temp_name, temp_value); //вернуть результат - имя и значение переменной
 		}
 
 		temp_value += src_str[i];
 	}
 
-	return std::make_tuple(string_type::variable_, temp_name, temp_value); //вернуть результат - имя и значение переменной
+	return std::make_tuple(string_type::_variable_, temp_name, temp_value); //вернуть результат - имя и значение переменной
 }
 
 std::tuple<std::string, std::string> ini_parser::get_section_variable_names(const std::string& src_str) //из строки запроса получить имя секции и имя переменной
@@ -300,7 +300,7 @@ void ini_parser::check_parser() //проверяет, нет ли в парсере проблем и выбрасыв
 	}
 
 	//bool invalid_data = false; //хранит информацию, есть ли в файле некорректная информация
-	if (invalid_data)
+	if (_invalid_data)
 	{
 		throw ParserException_incorrect_data();
 	}
@@ -481,7 +481,7 @@ void ini_parser::fill_parser(const std::string& file_name)
 		++lines_count;
 		std::string temp1 = delete_spaces(temp_str); //удалить пробелы и знаки табуляции из начала строки
 
-		string_type string_type_ = string_type::invalid_;  //строка невалидная
+		string_type string_type_ = string_type::_invalid_;  //строка невалидная
 		std::string name = ""; //имя секции или переменной
 		std::string value = ""; //значение переменной
 
@@ -490,7 +490,7 @@ void ini_parser::fill_parser(const std::string& file_name)
 
 		switch (string_type_) //string_type_ после исследования строки research_string содержит тип строки
 		{
-		case string_type::section_: //название секции
+		case string_type::_section_: //название секции
 
 			current_section_name = name;		//текущая секция для добавления переменных
 			it_name = sections_map->find(name); //есть ли уже такая секция в массиве парсера
@@ -511,7 +511,7 @@ void ini_parser::fill_parser(const std::string& file_name)
 			}
 			break;
 
-		case string_type::variable_: //переменная
+		case string_type::_variable_: //переменная
 
 			if (current_section_number < 0) //еще не было добавлено ни одной секции, а все переменные должны принадлежать какой-либо секции
 			{
@@ -526,10 +526,10 @@ void ini_parser::fill_parser(const std::string& file_name)
 
 			break;
 
-		case string_type::empty_:	   //пустая строка или комментарий			
+		case string_type::_empty_:	   //пустая строка или комментарий			
 			break;
 
-		case string_type::invalid_:   //строка невалидная
+		case string_type::_invalid_:   //строка невалидная
 			incorrect_str_num = lines_count;  //номер строки, содержащей некорректный синтаксис
 			incorrect_str = temp_str;  //содержимое строки с некорректным синтаксисом
 
@@ -538,7 +538,7 @@ void ini_parser::fill_parser(const std::string& file_name)
 
 		if (incorrect_str_num != 0) //не имеет смысла продолжать - в файле некорректные данные
 		{
-			invalid_data = true;
+			_invalid_data = true;
 			break; //прервать чтение данных из файла
 		}
 
