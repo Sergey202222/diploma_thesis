@@ -1,7 +1,7 @@
 #include <regex>
-#include "Spider.hpp"
-#include "http_client_async_ssl.cpp"
-#include "http_client_async.cpp"
+#include "spider.hpp"
+#include "http_client_async.hpp"
+#include "http_client_async_ssl.hpp"
 
 Spider::Spider(Search_parameters spider_data)
 {
@@ -26,7 +26,7 @@ Spider::~Spider()
 	}
 
 	delete data_base;
-
+	
 	std::cout << "\nIndexing finished. Total " << pool_queue.list_of_urls.size() << " pages were processed:\n";
 	print_urls_list();
 }

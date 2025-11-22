@@ -13,9 +13,9 @@ endif()
 project (file_server)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-#set(OPENSSL_ROOT_DIR D:/My_Programs/C++/openssl)
 set(BOOST_ROOT D:/My_Programs/C++/boost_1_89_0)
-set(PostgreSQL_ROOT D:/Programs/PostgreSQL/bin) 
+set(PostgreSQL_ROOT D:/Programs/PostgreSQL) 
+#set(OpenSSL D:/vcpkg/vcpkg/packages/openssl_x64-windows)
 #set(BOOST_INCLUDEDIR ${BOOST_ROOT}/include)
 #set(BOOST_LIBRARYDIR ${BOOST_ROOT}/lib)
 
@@ -23,19 +23,21 @@ set(PostgreSQL_ROOT D:/Programs/PostgreSQL/bin)
 find_package(Boost REQUIRED COMPONENTS)
 find_package(PostgreSQL REQUIRED)
 find_package(OpenSSL REQUIRED)
-include_directories(${OPENSSL_ROOT_DIR})
 
 add_subdirectory(D:/My_Programs/C++/libpqxx pqxx-build)
 #Добавляет директории с заголовочными файлами Boost в список путей для поиска заголовков.
 include_directories(${Boost_INCLUDE_DIRS})
 
 #Создает исполняемый файл file_server, используя указанные исходные файлы
+
+target_link_libraries(file_server PRIVATE OpenSSL::SSL)
+target_link_libraries(file_server PRIVATE OpenSSL::Crypto)
 add_executable(file_server
         diploma_thesis.cpp
         spider.hpp
         spider.cpp 
-        http_client_async_ssl.cpp 
-        http_client_async.cpp
+        http_client_async.hpp
+        http_client_async_ssl.hpp
         html_parser.hpp
         html_parser.cpp
         data_base.hpp
