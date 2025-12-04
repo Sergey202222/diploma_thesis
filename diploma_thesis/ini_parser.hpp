@@ -50,7 +50,7 @@ public:
 	ini_parser(const ini_parser& other);				// конструктор копирования	
 	ini_parser& operator = (const ini_parser& other);	// оператор копирующего присваивания
 	ini_parser(ini_parser&& other) noexcept;			// конструктор перемещения
-	ini_parser& operator=(ini_parser&& other) noexcept; // оператор перемещающего присваивания
+	ini_parser& operator=(ini_parser&& other) = default; // оператор перемещающего присваивания
 	~ini_parser();
 
 	void fill_parser(const std::string& file_name);

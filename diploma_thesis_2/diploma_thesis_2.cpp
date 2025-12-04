@@ -5,12 +5,13 @@
 #include "data_base.hpp"
 #include "server.cpp"
 
-const std::string ini_file_name = "search_server.ini";
+const std::string ini_file_name = "D:\\My_Programs\\C++\\netology\\homework9.2\\diploma_thesis_2\\search_server.ini";
 const std::string search_not_ready_str = "Search server is not ready to work.";
 
 
 int main()
 {
+	setlocale(LC_ALL, "rus");
 	ini_parser parser;
 	parser.fill_parser(ini_file_name);
 

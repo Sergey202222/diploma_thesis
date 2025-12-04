@@ -75,10 +75,10 @@ ini_parser::ini_parser(ini_parser&& other) noexcept	// конструктор перемещения
 	other.variables_str_array = nullptr;
 }
 
-ini_parser& ini_parser::operator=(ini_parser&& other) noexcept   // оператор перемещающего присваивания
+/*ini_parser& ini_parser::operator=(ini_parser&& other) noexcept   // оператор перемещающего присваивания
 {
 	return *this = ini_parser(other);
-}
+}*/
 
 std::string ini_parser::delete_spaces(const std::string& src_str) //удалить пробелы и знаки табуляции в начале строки
 {

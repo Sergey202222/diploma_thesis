@@ -4,7 +4,7 @@
 #include "ini_parser.hpp"
 #include "spider.hpp"
 
-const std::string ini_file_name = "spider.ini";
+const std::string ini_file_name = "D:/My_Programs/C++/netology/homework9.2/diploma_thesis/spider.ini";
 const std::string spider_not_ready_str = "Spider is not ready to work.";
 
 int main()

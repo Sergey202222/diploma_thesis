@@ -155,7 +155,7 @@ bool Data_base::start_db()
 	if (connect_db()) //подключиться к базе
 	{
 		result = create_tables() and //создать необходимые таблицы
-			create_templates(); //создать шаблоны для работы; 
+		create_templates(); //создать шаблоны для работы; 
 	}
 
 	return result;

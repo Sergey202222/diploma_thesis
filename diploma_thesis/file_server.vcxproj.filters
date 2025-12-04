@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\diploma_thesis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\spider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\html_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\data_base.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\ini_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\tasks_queue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\spider.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\http_client_async.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\http_client_async_ssl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\html_parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\data_base.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\ini_parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\parser_exceptions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\root_certificates.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\tasks_queue.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\My_Programs\C++\netology\homework9.2\diploma_thesis\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{405DF267-903E-3E63-96EE-CCD3CF6A89F7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{99E8780A-EB31-370D-A0E1-AF68A558EB3F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

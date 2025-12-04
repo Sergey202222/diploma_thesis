@@ -14,8 +14,8 @@ project (file_server)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BOOST_ROOT D:/My_Programs/C++/boost_1_89_0)
-set(PostgreSQL_ROOT D:/Programs/PostgreSQL) 
-#set(OpenSSL D:/vcpkg/vcpkg/packages/openssl_x64-windows)
+set(PostgreSQL_ROOT D:/Programs/PostgreSQL)
+set(OpenSSL_ROOT D:/vcpkg/vcpkg/packages/openssl_x64-windows/share/openssl)
 #set(BOOST_INCLUDEDIR ${BOOST_ROOT}/include)
 #set(BOOST_LIBRARYDIR ${BOOST_ROOT}/lib)
 
@@ -25,13 +25,15 @@ find_package(PostgreSQL REQUIRED)
 find_package(OpenSSL REQUIRED)
 
 add_subdirectory(D:/My_Programs/C++/libpqxx pqxx-build)
+#add_subdirectory(D:/vcpkg/vcpkg/packages/openssl_x64-windows openssl-build)
 #Добавляет директории с заголовочными файлами Boost в список путей для поиска заголовков.
 include_directories(${Boost_INCLUDE_DIRS})
+#include_directories(${OPENSSL_ROOT_DIR})
 
 #Создает исполняемый файл file_server, используя указанные исходные файлы
 
-target_link_libraries(file_server PRIVATE OpenSSL::SSL)
-target_link_libraries(file_server PRIVATE OpenSSL::Crypto)
+#target_link_libraries(file_server PRIVATE OpenSSL::SSL)
+#target_link_libraries(file_server PRIVATE OpenSSL::Crypto)
 add_executable(file_server
         diploma_thesis.cpp
         spider.hpp
@@ -51,12 +53,15 @@ add_executable(file_server
 
 #target_link_libraries(file_server PRIVATE ${OPENSSL_LIBRARIES})
 target_compile_features(file_server PRIVATE cxx_std_17)
+target_compile_options(file_server PRIVATE /bigobj)
 #Указывает, что исполняемый файл file_server должен быть связан с библиотеками Boost (filesystem и system)
 target_link_libraries(file_server
         PRIVATE
         #Boost::filesystem
         Boost::headers
         pqxx
+        OpenSSL::SSL
+        OpenSSL::Crypto
 )
 
 #Устанавливает путь для выходного исполняемого файла, 

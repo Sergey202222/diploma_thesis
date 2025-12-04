@@ -196,6 +196,20 @@ std::tuple<string_type, std::string, std::string> ini_parser::research_string(co
 
 		return std::make_tuple(string_type::variable_, temp_name, temp_value);
 	}
+
+	else
+	{
+		for (int i = end_pos + 1; i < src_str.size(); ++i)
+		{
+			if (src_str[i] == ';')
+			{
+				return std::make_tuple(string_type::variable_, temp_name, temp_value);
+			}
+
+			temp_value += src_str[i];
+		}
+		return std::make_tuple(string_type::variable_, temp_name, temp_value);
+	}
 }
 
 std::tuple<std::string, std::string> ini_parser::get_section_variable_names(const std::string& src_str) 

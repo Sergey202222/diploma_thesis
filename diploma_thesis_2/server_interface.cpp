@@ -91,7 +91,7 @@ std::string path_cat(beast::string_view base, beast::string_view path)
 
 std::string open_start_file_search_result(const std::string& file_path)
 {
-    // std::cout << "path = " << file_path << "\n";
+    std::cout << "path = " << file_path << "\n";
     std::ifstream res_file(file_path);
     if (!res_file.is_open())
     {
