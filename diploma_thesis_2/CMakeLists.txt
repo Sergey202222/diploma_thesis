@@ -39,7 +39,10 @@ add_executable(file_server
         index.html
         ini_parser.hpp
         ini_parser.cpp
-        parser_exceptions.hpp "server.cpp" "server_interface.cpp")
+        parser_exceptions.hpp
+        server.hpp
+        server_interface.hpp
+        server_interface.cpp)
 
 #target_link_libraries(file_server PRIVATE OpenSSL::SSL)
 target_compile_features(file_server PRIVATE cxx_std_17)

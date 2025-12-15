@@ -77,6 +77,7 @@ public:
             beast::bind_front_handler(
                 &session::on_read,
                 shared_from_this()));
+        req_.method(http::verb::post);
     }
 
     void
@@ -214,6 +215,7 @@ private:
     void
         do_accept()
     {
+
         // The new connection gets its own strand
         acceptor_.async_accept(
             net::make_strand(ioc_),

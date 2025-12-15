@@ -99,12 +99,12 @@ http::message_generator handle_request(
     body.open(path.c_str(), beast::file_mode::scan, ec);
 
     // Handle the case where the file doesn't exist
-    if (ec == beast::errc::no_such_file_or_directory)
-        return not_found(req.target());
+    /*if (ec == beast::errc::no_such_file_or_directory)
+        return not_found(req.target());*/
 
     // Handle an unknown error
-    if (ec)
-        return server_error(ec.message());
+    //if (ec)
+        //return server_error(ec.message());
 
     // Cache the size since we need it after the move
     auto const size = body.size();
@@ -121,7 +121,7 @@ http::message_generator handle_request(
     }
 
     // Respond to GET request
-    else if (req.method() == http::verb::get)
+    /*else if (req.method() == http::verb::get)
     {
         http::response<http::file_body> res{
         std::piecewise_construct,
@@ -132,7 +132,7 @@ http::message_generator handle_request(
         res.content_length(size);
         res.keep_alive(req.keep_alive());
         return res;
-    }
+    }*/
 
     //POST request
 

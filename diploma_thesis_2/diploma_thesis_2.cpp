@@ -3,7 +3,7 @@
 
 #include "ini_parser.hpp"
 #include "data_base.hpp"
-#include "server.cpp"
+#include "server.hpp"
 
 const std::string ini_file_name = "D:\\My_Programs\\C++\\netology\\homework9.2\\diploma_thesis_2\\search_server.ini";
 const std::string search_not_ready_str = "Search server is not ready to work.";
@@ -89,6 +89,5 @@ int main()
 				ioc.run();
 			});
 	ioc.run();
-
 	return EXIT_SUCCESS;
 }
