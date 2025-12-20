@@ -65,7 +65,7 @@ int main()
 	auto const address = net::ip::make_address(address_str);
 	auto const port = static_cast<unsigned short>(std::stoi(port_str));
 
-	auto const doc_root = std::make_shared<std::string>(".");
+	auto const doc_root = std::make_shared<std::string>("../../../..");
 	auto const threads = 1;
 
 	// The io_context is required for all I/O
